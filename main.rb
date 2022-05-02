@@ -1,4 +1,5 @@
 require_relative "player"
+require_relative "question"
 
 class Game
 
@@ -6,8 +7,6 @@ class Game
     @player1 = Player.new("David")
     @player2 = Player.new("Paul")
     @current_turn = @player1
-    @value1 = ''
-    @value2 = ''
   end
 
   def begin
@@ -24,24 +23,21 @@ class Game
     @current_turn === @player1 ? @current_turn = @player2 : @current_turn = @player1
   end
 
-  def make_guess
+  def make_guess(question)
       puts "Enter your Answer"
-      answer = @value1+@value2
       guess = gets.chomp.to_i
-      if guess === answer
+      if guess === question.answer
         puts "Correct Answer"
       else  
         puts "Incorrect Answer"
         @current_turn.lives -= 1
       end
   end
-  
-  
-  def start_turn
-    generate_question
-    puts "#{@current_turn.name}: What is the value of #{@value1} plus #{@value2} equal?"
-    make_guess
 
+  def start_turn
+    question = Question.new()
+    puts "#{@current_turn.name}: What is the value of #{question.value1} plus #{question.value2} equal?"
+    make_guess(question)
     get_life_status
     if @player1.lives < 1 || @player2.lives < 1
       puts "Sorry #{@current_turn.name} you lose"
@@ -49,12 +45,6 @@ class Game
       alternate_turn
       start_turn
     end
-  end
-
-  def generate_question
-    @value1 = rand(100)
-    @value2 = rand(100)
-    answer = @value1+@value2
   end
 end
 
