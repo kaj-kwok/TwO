@@ -35,7 +35,7 @@ class Game
   end
 
   def start_turn
-    question = Question.new()
+    question = Question.new
     puts "#{@current_turn.name}: What is the value of #{question.value1} plus #{question.value2} equal?"
     make_guess(question)
     get_life_status
