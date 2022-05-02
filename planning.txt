@@ -1,0 +1,19 @@
+2 Players
+each have 3 lives, game ends  when they have 0 lives
+alternate turns, if incorrect lose a life, at the end of each turn output life total
+game will annouce who won and what the other player's score is
+
+class of Player(x2) - which will hold the number of lives and the functions to state the number of lives
+values : number of lives
+methods: -retrieve number of lives
+          - set number of lives
+
+class of Game state - which will hold current turn number and whose turn it is currently,.state the current game score per turn and if the game has ended
+constants = turn number / current player
+methods: - begin the game
+          - New turn 
+          - Generate question
+          - enter answer (check against answer)
+          
+
+? class to generate question - stores the current value of the answer and generation of new values for questions, states the current question and compares to answer
