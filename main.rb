@@ -23,13 +23,32 @@ class Game
   def alternate_turn
     @current_turn === @player1 ? @current_turn = @player2 : @current_turn = @player1
   end
+
+  def make_guess
+      puts "Enter your Answer"
+      answer = @value1+@value2
+      guess = gets.chomp.to_i
+      if guess === answer
+        puts "Correct Answer"
+      else  
+        puts "Incorrect Answer"
+        @current_turn.lives -= 1
+      end
+  end
+  
   
   def start_turn
     generate_question
     puts "#{@current_turn.name}: What is the value of #{@value1} plus #{@value2} equal?"
-    guess = gets.chomp.to_i
+    make_guess
+
     get_life_status
-    alternate_turn
+    if @player1.lives < 1 || @player2.lives < 1
+      puts "Sorry #{@current_turn.name} you lose"
+    else
+      alternate_turn
+      start_turn
+    end
   end
 
   def generate_question
